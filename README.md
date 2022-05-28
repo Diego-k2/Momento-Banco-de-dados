@@ -119,3 +119,51 @@ VALUES ('William', 'Ferreira', 'ferreira.will@momento.org', '688 695 4949', '202
 <code>SELECT funcionarios.primeiro_nome, dependentes.primeiro_nome FROM dependentes INNER JOIN funcionarios WHERE dependentes.funcionario_id = funcionarios.funcionario_id 
 AND dependentes.sobrenome LIKE '%Manuel%';</code><br>
 
+
+
+<h2>12 - Qual região possui mais países?</h2>
+
+<b>Resposta: </b> Europa
+
+<b>QUERY EM SQL</b>:<br>
+
+<code>SELECT regiao.regiao_name, COUNT(paises.regiao_id) FROM paises INNER JOIN regiao WHERE regiao.regiao_id = paises.regiao_id GROUP BY regiao.regiao_name;</code><br>
+
+
+
+<h2>13 - Exiba o nome cada funcionário acompanhado de seus dependentes.</h2>
+
+<b>QUERY EM SQL</b>:<br>
+
+<code>SELECT funcionarios.primeiro_nome, dependentes.primeiro_nome FROM funcionarios INNER JOIN dependentes WHERE funcionarios.funcionario_id = dependentes.funcionario_id</code><br>
+
+<h2>14 - Karen Partners possui um cônjuge?</h2>
+
+<b>Resposta: </b> Sim, o Alec
+
+<b>QUERY EM SQL</b>:<br>
+
+<code>SELECT dependentes.primeiro_nome, dependentes.sobrenome FROM dependentes INNER JOIN funcionarios WHERE funcionarios.funcionario_id = dependentes.funcionario_id 
+				AND dependentes.funcionario_id = (SELECT funcionario_id FROM funcionarios WHERE primeiro_nome LIKE '%Karen%' AND sobrenome
+                 LIKE '%Partners%');</code><br>
+
+<h2>15 - O ID da tabela de países não segue um padrão numérico. Na sua visão, qual o impacto disso no desenvolvimento do banco?</h2>
+
+<b>Resposta: </b> Nenhum, pois o requisito para ser uma <b>Primary Key</b> é não ser nulo e ser unico.
+
+
+
+<h2>16 - Escolha um país para se mudar. Qual seria esse país? Por que escolheria esse país? E o departamento. O que seria? Como seriam seus funcionários?</h2>
+
+<b>Resposta: </b>Para a Argentina, eu gosto de churrasco e falam que o churrasco la é bom. Departamento de comidas, meus funcionarios iriam gostar de comida
+
+<h2>17 - Atualize as informações na tabela para que seu departamento seja criado.</h2>
+
+<b>QUERY EM SQL</b>:<br>
+
+<code>INSERT INTO posicao (endereco, cidade, pais_id) VALUES ( 'Brandsen 805', 'Buenos Aires', 'AR';</code><br>
+
+<code>INSERT INTO departamento (departamento_name, posicao_id) VALUES ('Comedores de churrasco', (SELECT posicao_id FROM posicao WHERE endereco LIKE '%Brandsen 805%'));</code><br>
+
+
+
